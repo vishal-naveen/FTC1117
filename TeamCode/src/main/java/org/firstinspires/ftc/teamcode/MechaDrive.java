@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Gamepad;
@@ -16,6 +17,8 @@ public class MechaDrive extends OpMode {
     private DcMotor frontRight = null;
     private DcMotor backLeft = null;
     private DcMotor backRight = null;
+
+    private Servo droneServo = null;
 
 
     double speed = 0.5;
@@ -32,6 +35,8 @@ public class MechaDrive extends OpMode {
 
         frontLeft.setDirection(DcMotorSimple.Direction.REVERSE);
         backLeft.setDirection(DcMotorSimple.Direction.REVERSE);
+
+        droneServo = hardwareMap.get(Servo.class, "droneServo");
 
     }
 
@@ -78,6 +83,16 @@ public class MechaDrive extends OpMode {
 
 
         gamepad1.copy(prevGamepad1);
+
+        if(gamepad1.dpad_up){
+            droneServo.setPosition(0.2);
+        }
+
+        double droneServoPos = droneServo.getPosition();
+
+        if(gamepad1.dpad_up && droneServoPos == 0.2){
+            droneServo.setPosition(0);
+        }
 
     }
 }
