@@ -33,7 +33,7 @@ class ColorDetector implements VisionProcessor, CameraStreamSource {
     private static final Scalar BLUE = new Scalar(0,0,255);
 
     // The detection thresholds are only used by the detector and shouldn't change
-    private static final double MIN_DETECTION_THRESH = 50;
+    private static final double MIN_DETECTION_THRESH = 75;
     private static final int MIN_DETECTION_FRAMES = 30;
 
     // Telemetry doesn't need to be accessible and shouldn't change mid-run
@@ -127,7 +127,7 @@ class ColorDetector implements VisionProcessor, CameraStreamSource {
     }
 
     // Get detection regardless of confidence if that is needed for some reason
-    public Detection getUnconfidentDetection() {
+    public Detection getDetection() {
         return detection;
     }
 
@@ -191,14 +191,14 @@ class ColorDetector implements VisionProcessor, CameraStreamSource {
                     confidentDetection = true;
                 }
             } else {
-                confidentDetection = false;
+                confidentDetection = true;
                 sameDetectionCount = 0;
             }
 
             // If no zone is above threshold, no detection is made
         } else {
             detection = Detection.NONE;
-            confidentDetection = false;
+            confidentDetection = true;
             sameDetectionCount = 0;
         }
 
