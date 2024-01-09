@@ -14,7 +14,7 @@ import org.opencv.core.Rect;
 
 
 
-@Autonomous(name = "BlueFar", group="Auto")
+//@Autonomous(name = "BlueFar", group="Auto")
 public class BlueFar extends LinearOpMode {
 
     private DcMotor frontLeft = null;
@@ -50,9 +50,29 @@ public class BlueFar extends LinearOpMode {
         telemetry.addData("Detection captured:",detector.getConfidentDetection());
         Detection detection = detector.getConfidentDetection();
 
+        frontLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        frontLeft.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        frontLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+        frontRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        frontRight.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        frontRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+        backLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        backLeft.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        backLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+        backRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        backRight.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        backRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+
+        frontLeft.setDirection(DcMotorSimple.Direction.REVERSE);
+        backLeft.setDirection(DcMotorSimple.Direction.REVERSE);
+
         waitForStart();
 
-        moveForward(0.1,100);
+        moveForward(1,100);
 
 
 
@@ -83,20 +103,36 @@ public class BlueFar extends LinearOpMode {
 //                strafeRight(0.5,3750);
                 break;
             case NONE:
-                moveForward(0.3,100);
-                setZero(250);
-                turnLeft(0.3,330);
-                setZero(250);
-                moveForward(0.6,800);
-                setZero(250);
-                moveBackward(0.3,500);
-                setZero(250);
-                turnRight(0.3,330);
-                setZero(250);
-                moveBackward(0.6,450);
+                frontLeft.setTargetPosition(5000);
+                frontRight.setTargetPosition(1000);
+                backLeft.setTargetPosition(-1000);
+                backRight.setTargetPosition(1000);
+
+                frontLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                frontRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                backLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                backRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+
+                frontLeft.setPower(0.1);
+                frontRight.setPower(0.5);
+                backLeft.setPower(0.5);
+                backRight.setPower(0.5);
+
+//                moveForward(0.3,100);
 //                setZero(250);
-//                strafeRight(0.5,3850);
+//                turnLeft(0.3,330);
 //                setZero(250);
+//                moveForward(0.6,800);
+//                setZero(250);
+//                moveBackward(0.3,500);
+//                setZero(250);
+//                turnRight(0.3,330);
+//                setZero(250);
+//                moveBackward(0.6,450);
+////                setZero(250);
+////                strafeRight(0.5,3850);
+////                setZero(250);
                 break;
         }
 

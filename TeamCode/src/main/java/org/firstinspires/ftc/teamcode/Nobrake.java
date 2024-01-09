@@ -15,8 +15,8 @@ import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.configuration.annotations.MotorType;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-@TeleOp
-public class testdrive extends OpMode {
+@TeleOp(name="NoBrake")
+public class Nobrake extends OpMode {
 
     public Servo droneServo;
 

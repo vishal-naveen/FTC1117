@@ -1,59 +1,73 @@
-//package org.firstinspires.ftc.teamcode;
-//
-//import  static org.firstinspires.ftc.teamcode.ColorDetector.*;
-//
-//import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-//import com.qualcomm.robotcore.eventloop.opmode.OpMode;
-//import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-//import com.qualcomm.robotcore.hardware.DcMotor;
-//import com.qualcomm.robotcore.hardware.DcMotorSimple;
-//
-//import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
-//import org.firstinspires.ftc.robotcore.external.stream.CameraStreamServer;
-//import org.firstinspires.ftc.robotcore.external.stream.CameraStreamSource;
-//import org.firstinspires.ftc.vision.VisionPortal;
-//import org.opencv.core.Rect;
-//
-//
-//
-//
-//@Autonomous(name = "testauto", group="test")
-//public class testauto extends LinearOpMode {
-//
-//    private DcMotor frontLeft;
-//    private DcMotor frontRight;
-//    private DcMotor backLeft;
-//    private DcMotor backRight;
-//
-//    ColorDetector detector;
-//
-//    VisionPortal visionPoral;
-//
-//
-//    private int frontRightPos;
-//    private int frontLeftPos;
+package org.firstinspires.ftc.teamcode;
+
+import  static org.firstinspires.ftc.teamcode.ColorDetector.*;
+
+import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.eventloop.opmode.OpMode;
+import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorController;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
+
+import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
+import org.firstinspires.ftc.robotcore.external.stream.CameraStreamServer;
+import org.firstinspires.ftc.robotcore.external.stream.CameraStreamSource;
+import org.firstinspires.ftc.vision.VisionPortal;
+import org.opencv.core.Rect;
+
+
+
+
+//@Autonomous(name = "testauto1", group="test")
+public class testauto extends LinearOpMode {
+
+    private DcMotor frontLeft;
+    private DcMotor frontRight;
+    private DcMotor backLeft;
+    private DcMotor backRight;
+
+    ColorDetector detector;
+
+    VisionPortal visionPoral;
+
+
+    private int frontRightPos;
+    private int frontLeftPos;
 //    private int backRightPos;
 //    private int backLeftPos;
-//
-//
-//
-//    @Override
-//    public void runOpMode() throws InterruptedException{
-//
-//        frontLeft = hardwareMap.get(DcMotor.class, "FL");
-//        frontRight = hardwareMap.get(DcMotor.class, "FR");
-//        backLeft = hardwareMap.get(DcMotor.class, "BL");
-//        backRight = hardwareMap.get(DcMotor.class, "BR");
-//
-//        frontLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-//        frontRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-//        backLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-//        backRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-//
-//
-//        frontLeft.setDirection(DcMotorSimple.Direction.REVERSE);
+
+
+
+
+
+
+    @Override
+    public void runOpMode(){
+
+        frontLeft = hardwareMap.get(DcMotor.class, "FL");
+        frontRight = hardwareMap.get(DcMotor.class, "FR");
+        backLeft = hardwareMap.get(DcMotor.class, "BL");
+        backRight = hardwareMap.get(DcMotor.class, "BR");
+
+        frontLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        frontLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+        frontRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+//        frontRight.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        frontRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+        backLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+//        backLeft.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        backLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+        backRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+//        backRight.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        backRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+        frontLeft.setDirection(DcMotorSimple.Direction.REVERSE);
 //        backLeft.setDirection(DcMotorSimple.Direction.REVERSE);
-//
+
+
 //        Rect leftZone = centerRect(70,280,140,150);
 //        Rect midZone = centerRect(260,280,140,150);
 //        Rect rightZone = centerRect(535,290,140,150);
@@ -63,236 +77,182 @@
 //
 //        telemetry.addData("Detection captured:",detector.getConfidentDetection());
 //        Detection detection = detector.getConfidentDetection();
+
+
+
+
+
+//        frontLeft
+//        frontRight
+//        backLeft
+//        backRight
+
+
+//        frontLeft.setTargetPosition(1000);
+//        frontRight.setTargetPosition(2000);
+//        backLeft.setTargetPosition(-5000);
+//        backRight.setTargetPosition(15000);
 //
-//        frontLeftPos = 0;
-//        frontRightPos = 0;
-//        backLeftPos = 0;
-//        backRightPos = 0;
-//
-//        waitForStart();
-//
-//        moveForward(0.1,100);
-//
-//
-//
+//        frontLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+//        frontRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+//        backLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+//        backRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+        waitForStart();
+
+        drive(1500,1500,1500,1500,0.5);
+//        setZero(250);
+        driveLeft(1000,0.3);
+//        setZero(250);
+        drive(1500,1500,1500,1500,0.4);
+//        setZero(250);
+        driveRight(1000,0.4);
+//        setZero(250);
+
+//        frontLeft.setPower(1);
+//        frontRight.setPower(1);
+//        backLeft.setPower(1);
+//        backRight.setPower(1);
+
+        while (opModeIsActive() && frontLeft.isBusy() && frontRight.isBusy()) {
+            // Wait for the motors to reach their target positions
+            telemetry.addData("Encoder PositionFL", frontLeft.getCurrentPosition());
+            telemetry.addData("Encoder PositionFR", frontRight.getCurrentPosition());
+            telemetry.update();
+        }
+
+
 //        while(!detector.isDetectionConfident()) {}
 //        switch (detector.getDetection()){
 //            case RIGHT:
-//                driveRight(100,100,100,100,0.2, 100);
-//                setZero();
-//                driveForward(100,100,100,100,0.2, 100);
-//                setZero();
 //                break;
 //            case MIDDLE:
-//                driveForward(100,100,100,100,0.2, 100);
-//                setZero();
-//                driveLeft(100,100,100,100,0.2, 100);
-//                setZero();
 //                break;
 //            case NONE:
-//                driveBackward(100,100,100,100,0.2, 100);
-//                setZero();
-//                driveRight(100,100,100,100,0.2, 100);
-//                setZero();
+////                drive(500,500,500,500,0.5);
 //                break;
 //        }
-//
-////        switch (detector.getConfidentDetection()){
-////            case RIGHT:
-////                turnRight(0.2,1000);
-////                setZero();
-////                break;
-////            case MIDDLE:
-////                moveForward(0.5,1000);
-////                setZero();
-////                turnLeft(0.5,1000);
-////                setZero();
-////                turnRight(0.5,1000);
-////                setZero();
-////                moveBackward(0.5,1000);
-////                setZero();
-////                break;
-////        }
-////
-////        switch (detector.getUnconfidentDetection()){
-////            case NONE:
-////                moveForward(0.5,1000);
-////                setZero();
-////                turnLeft(0.2,1000);
-////                setZero();
-////                turnRight(0.5,1000);
-////        }
-//
-//
-//    }
-//
-//
-//
-//
-//    private void driveForward(int frontLeftT, int frontRightT, int backLeftT, int backRightT, double power, long time){
-//        frontLeftPos += frontLeftT;
-//        frontRightPos += frontRightT;
-//        backLeftPos += backLeftT;
-//        backRightPos += backRightT;
-//
-//        frontLeft.setTargetPosition(frontLeftPos);
-//        frontRight.setTargetPosition(frontRightPos);
-//        backLeft.setTargetPosition(backLeftPos);
-//        backRight.setTargetPosition(backRightPos);
-//
+
+
+
+
+
+    }
+
+
+    public void drive(int frontLeftT, int frontRightT, int backLeftT, int backRightT, double power){
+//        frontLeftPos = frontLeftT;
+//        frontRightPos = frontRightT;
+//        backLeftPos = backLeftT;
+//        backRightPos = backRightT;
+
+
+
+        frontLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        frontRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+        frontLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        frontRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        backLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        backRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+        frontLeft.setTargetPosition(frontLeftT);
+        frontRight.setTargetPosition(frontRightT);
+        backLeft.setTargetPosition(backLeftT);
+        backRight.setTargetPosition(backRightT);
+
+        frontLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        frontRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        backLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        backRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+        frontLeft.setPower(power);
+        frontRight.setPower(power);
+        backLeft.setPower(power);
+        backRight.setPower(power);
+
+
+
+    }
+
+    public void driveLeft(int frontRightT, double power){
+//        frontLeftPos = frontLeftT;
+//        frontRightPos = frontRightT;
+//        backLeftPos = backLeftT;
+//        backRightPos = backRightT;
+
+
+
+//        frontLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        frontRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+//        frontLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        frontRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+//        backLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+//        backRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+//        frontLeft.setTargetPosition(frontLeftT);/**/
+        frontRight.setTargetPosition(frontRightT);
+//        backLeft.setTargetPosition(backLeftT);
+//        backRight.setTargetPosition(backRightT);
+
 //        frontLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        frontRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+//        backLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+//        backRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+//        frontLeft.setPower(power);
+        frontRight.setPower(power);
+//        backLeft.setPower(power);
+//        backRight.setPower(power);
+
+
+
+    }
+
+    public void driveRight(int frontLeftT, double power){
+//        frontLeftPos = frontLeftT;
+//        frontRightPos = frontRightT;
+//        backLeftPos = backLeftT;
+//        backRightPos = backRightT;
+
+
+
+        frontLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+//        frontRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+        frontLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+//        frontRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+//        backLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+//        backRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+        frontLeft.setTargetPosition(frontLeftT);
+//        frontRight.setTargetPosition(frontRightT);
+//        backLeft.setTargetPosition(backLeftT);
+//        backRight.setTargetPosition(backRightT);
+
+        frontLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 //        frontRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 //        backLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 //        backRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-//
-//        frontLeft.setPower(power);
+
+        frontLeft.setPower(power);
 //        frontRight.setPower(power);
 //        backLeft.setPower(power);
 //        backRight.setPower(power);
-//
-//        sleep(time);
-//
-//        while(opModeIsActive() && frontLeft.isBusy() && frontRight.isBusy() && backLeft.isBusy() && backRight.isBusy()){
-//            idle();
-//        }
-//
-//    }
-//
-//    private void driveBackward(int frontLeftT, int frontRightT, int backLeftT, int backRightT, double power, long time){
-//        frontLeftPos += frontLeftT;
-//        frontRightPos += frontRightT;
-//        backLeftPos += backLeftT;
-//        backRightPos += backRightT;
-//
-//        frontLeft.setTargetPosition(-frontLeftPos);
-//        frontRight.setTargetPosition(-frontRightPos);
-//        backLeft.setTargetPosition(-backLeftPos);
-//        backRight.setTargetPosition(-backRightPos);
-//
-//        frontLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-//        frontRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-//        backLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-//        backRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-//
-//        frontLeft.setPower(-power);
-//        frontRight.setPower(-power);
-//        backLeft.setPower(-power);
-//        backRight.setPower(-power);
-//
-//        sleep(time);
-//
-//        while(opModeIsActive() && frontLeft.isBusy() && frontRight.isBusy() && backLeft.isBusy() && backRight.isBusy()){
-//            idle();
-//        }
-//
-//    }
-//
-//    private void driveLeft(int frontLeftT, int frontRightT, int backLeftT, int backRightT, double power, long time){
-//        frontLeftPos += frontLeftT;
-//        frontRightPos += frontRightT;
-//        backLeftPos += backLeftT;
-//        backRightPos += backRightT;
-//
-//        frontLeft.setTargetPosition(-frontLeftPos);
-//        frontRight.setTargetPosition(frontRightPos);
-//        backLeft.setTargetPosition(-backLeftPos);
-//        backRight.setTargetPosition(backRightPos);
-//
-//        frontLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-//        frontRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-//        backLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-//        backRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-//
-//        frontLeft.setPower(-power);
-//        frontRight.setPower(power);
-//        backLeft.setPower(-power);
-//        backRight.setPower(power);
-//
-//        sleep(time);
-//
-//        while(opModeIsActive() && frontLeft.isBusy() && frontRight.isBusy() && backLeft.isBusy() && backRight.isBusy()){
-//            idle();
-//        }
-//
-//    }
-//
-//    public void setZero(){
-//        frontLeft.setPower(0);
-//        frontRight.setPower(0);
-//        backLeft.setPower(0);
-//        backRight.setPower(0);
-//    }
-//
-//    private void driveRight(int frontLeftT, int frontRightT, int backLeftT, int backRightT, double power, long time){
-//        frontLeftPos += frontLeftT;
-//        frontRightPos += frontRightT;
-//        backLeftPos += backLeftT;
-//        backRightPos += backRightT;
-//
-//        frontLeft.setTargetPosition(frontLeftPos);
-//        frontRight.setTargetPosition(-frontRightPos);
-//        backLeft.setTargetPosition(backLeftPos);
-//        backRight.setTargetPosition(-backRightPos);
-//
-//        frontLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-//        frontRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-//        backLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-//        backRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-//
-//        frontLeft.setPower(power);
-//        frontRight.setPower(-power);
-//        backLeft.setPower(power);
-//        backRight.setPower(-power);
-//
-//        sleep(time);
-//
-//        while(opModeIsActive() && frontLeft.isBusy() && frontRight.isBusy() && backLeft.isBusy() && backRight.isBusy()){
-//            idle();
-//        }
-//
-//    }
-//
-//
-//
-//
-//
-//    public void moveForward(double power, long time){
-//        frontLeft.setPower(power);
-//        frontRight.setPower(power);
-//        backLeft.setPower(power);
-//        backRight.setPower(power);
-//
-//        sleep(time);
-//    }
-//
-//    public void moveBackward(double power, long time){
-//        frontLeft.setPower(-power);
-//        frontRight.setPower(-power);
-//        backLeft.setPower(-power);
-//        backRight.setPower(-power);
-//
-//        sleep(time);
-//    }
-//
-//    public void turnLeft(double power, long time){
-//        frontLeft.setPower(-power);
-//        frontRight.setPower(power);
-//        backLeft.setPower(-power);
-//        backRight.setPower(power);
-//
-//        sleep(time);
-//    }
-//
-//    public void turnRight(double power, long time){
-//        frontLeft.setPower(power);
-//        frontRight.setPower(-power);
-//        backLeft.setPower(power);
-//        backRight.setPower(-power);
-//
-//        sleep(time);
-//    }
-//
-//
-//
-//
-//}
+
+
+
+    }
+
+    public void setZero(long time){
+        frontLeft.setPower(0);
+        frontRight.setPower(0);
+
+        sleep(time);
+    }
+
+
+
+
+}

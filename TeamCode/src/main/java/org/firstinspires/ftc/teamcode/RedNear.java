@@ -14,7 +14,7 @@ import org.opencv.core.Rect;
 
 
 
-@Autonomous(name = "RedNear", group="Auto")
+//@Autonomous(name = "RedNear", group="Auto")
 public class RedNear extends LinearOpMode {
 
     private DcMotor frontLeft = null;
@@ -47,50 +47,69 @@ public class RedNear extends LinearOpMode {
         visionPoral = VisionPortal.easyCreateWithDefaults(hardwareMap.get(WebcamName.class, "Webcam 1"), detector);
         CameraStreamServer.getInstance().setSource(detector);
 
-        telemetry.addData("Detection captured:",detector.getConfidentDetection());
+
+
+
         Detection detection = detector.getConfidentDetection();
 
         waitForStart();
 
-        moveForward(0.1,100);
+        if(opModeIsActive()){
 
-
-
-        while(!detector.isDetectionConfident()) {}
-        switch (detector.getDetection()){
-            case RIGHT:
-                moveForward(0.4,850);
-                setZero(250);
-                turnRight(0.4,750);
-                setZero(250);
-                moveForward(0.5,100);
-                setZero(250);
-                moveBackward(0.5,150);
-                setZero(250);
-                turnLeft(0.4,700);
-                setZero(250);
-                moveBackward(0.4,550);
-                setZero(250);
-                strafeLeft(0.5,1750);
-                setZero(250);
-                break;
-            case MIDDLE:
-                moveForward(0.4,1200);
-                setZero(250);
-                moveBackward(0.5,300);
-                setZero(250);
-                strafeLeft(0.5,2000);
-                break;
-            case NONE:
-                turnLeft(0.4,220);
-                setZero(250);
-                moveForward(0.5,850);
-                setZero(250);
-                moveBackward(0.2,500);
-                setZero(250);
-                strafeLeft(0.5,1600);
-                break;
+            telemetry.addData("Detection captured:",detector.getConfidentDetection());
+            telemetry.addData("FL: ", frontLeft.getCurrentPosition());
+            telemetry.addData("FR: ", frontRight.getCurrentPosition());
+            telemetry.addData("BL: ", backLeft.getCurrentPosition());
+            telemetry.addData("BR: ", backRight.getCurrentPosition());
+            telemetry.update();
         }
+
+
+
+
+            while(!detector.isDetectionConfident()) {}
+            switch (detector.getDetection()){
+                case RIGHT:
+                    moveForward(0.4,850);
+                    setZero(250);
+                    turnRight(0.4,750);
+                    setZero(250);
+                    moveForward(0.5,100);
+                    setZero(250);
+                    moveBackward(0.5,150);
+                    setZero(250);
+                    turnLeft(0.4,700);
+                    setZero(250);
+                    moveBackward(0.4,550);
+                    setZero(250);
+                    strafeLeft(0.5,1750);
+                    setZero(250);
+                    break;
+                case MIDDLE:
+                    moveForward(0.4,1200);
+                    setZero(250);
+                    moveBackward(0.5,300);
+                    setZero(250);
+                    strafeLeft(0.5,2000);
+                    break;
+                case NONE:
+                    turnLeft(0.4,220);
+                    setZero(250);
+                    moveForward(0.5,850);
+                    setZero(250);
+                    moveBackward(0.2,500);
+                    setZero(250);
+                    strafeLeft(0.5,1600);
+                    break;
+            }
+
+
+
+//        moveForward(0.1,100);
+
+
+
+
 
 //        switch (detector.getConfidentDetection()){
 //            case RIGHT:

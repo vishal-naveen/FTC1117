@@ -14,7 +14,7 @@ import org.opencv.core.Rect;
 
 
 
-@Autonomous(name = "RedFar", group="Auto")
+//@Autonomous(name = "RedFar", group="Auto")
 public class RedFar extends LinearOpMode {
 
     private DcMotor frontLeft = null;
@@ -48,11 +48,18 @@ public class RedFar extends LinearOpMode {
         CameraStreamServer.getInstance().setSource(detector);
 
         telemetry.addData("Detection captured:",detector.getConfidentDetection());
+
         Detection detection = detector.getConfidentDetection();
 
         waitForStart();
 
-        moveForward(0.1,100);
+        telemetry.addData("FL: ", frontLeft.getPower());
+        telemetry.addData("FR: ", frontRight.getPower());
+        telemetry.addData("BL: ", backLeft.getPower());
+        telemetry.addData("BR: ", backRight.getPower());
+        telemetry.update();
+
+//        moveForward(0.1,100);
 
 
 

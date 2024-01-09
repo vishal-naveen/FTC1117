@@ -1,6 +1,7 @@
 
 package org.firstinspires.ftc.teamcode;
 
+
 import static org.opencv.core.Core.max;
 import static java.lang.Math.abs;
 
@@ -42,6 +43,9 @@ public class MechaDrive extends OpMode {
     double speed = 0.72;
 
 
+
+
+
     Gamepad prevGamepad1 = new Gamepad();
 
     @Override
@@ -53,6 +57,7 @@ public class MechaDrive extends OpMode {
 
         frontLeft.setDirection(DcMotorSimple.Direction.REVERSE);
         backLeft.setDirection(DcMotorSimple.Direction.REVERSE);
+        backRight.setDirection(DcMotorSimple.Direction.REVERSE);
 
         droneServo = hardwareMap.get(Servo.class, "droneServo");
 
@@ -74,11 +79,64 @@ public class MechaDrive extends OpMode {
         hangServo.setPosition(0.5);
 
         armServo1.setPosition(0.2);
+
+//        frontLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+//        frontRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+//        backLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+//        backRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+//        frontLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+//        frontLeft.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+//
+//        frontRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+//        frontRight.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+//
+//        backLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+//        backLeft.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+//
+//        backRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+//        backRight.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
     }
 
 
     @Override
     public void loop() {
+
+//        double CPR = 537.6;
+//
+//
+        int positionFL = frontLeft.getCurrentPosition();
+//        double revolutionsFL = positionFL/CPR;
+//        double angleFL = revolutionsFL * 360;
+//        double angleNormalizedFL = angleFL % 360;
+//
+        int positionFR = frontRight.getCurrentPosition();
+//        double revolutionsFR = positionFR/CPR;
+//        double angleFR = revolutionsFR * 360;
+//        double angleNormalizedFR = angleFR % 360;
+//
+        int positionBL = backLeft.getCurrentPosition();
+//        double revolutionsBL = positionBL/CPR;
+//        double angleBL = revolutionsBL * 360;
+//        double angleNormalizedBL = angleBL % 360;
+//
+        int positionBR = backRight.getCurrentPosition();
+//        double revolutionsBR = positionBR/CPR;
+//        double angleBR = revolutionsBR * 360;
+//        double angleNormalizedBR = angleBR % 360;
+//
+//        double diameter = 3.77953;
+//        double circumference = Math.PI * diameter;
+//
+//        double distanceFL = circumference * revolutionsFL;
+//        double distanceFR = circumference * revolutionsFR;
+//        double distanceBL = circumference * revolutionsBL;
+//        double distanceBR = circumference * revolutionsBR;
+
+
+
+
+
         if (gamepad2.left_bumper){
             droneServo.setPosition(0.7);
         }
@@ -133,15 +191,30 @@ public class MechaDrive extends OpMode {
 
 
 
-        double y = -gamepad1.left_stick_y;
-        double x = gamepad1.left_stick_x;
+//        double y = -gamepad1.left_stick_y;
+//        double x = gamepad1.left_stick_x;
+//        double rx = gamepad1.right_stick_x;
+//
+//        double denominator = Math.max(abs(y) + abs(x) + abs(rx), 1);
+//        double frontLeftPower = ((y + x + rx) / (denominator)*speed);
+//        double backLeftPower = ((y - x + rx) / (denominator)*speed);
+//        double frontRightPower = ((y - x - rx) / (denominator)*speed);
+//        double backRightPower = ((y + x - rx) / (denominator)*speed);
+
+        double y = -gamepad1.left_stick_y; // Remember, Y stick value is reversed
+        double x = gamepad1.left_stick_x * 1.1; // Counteract imperfect strafing
         double rx = gamepad1.right_stick_x;
 
-        double denominator = Math.max(abs(y) + abs(x) + abs(rx), 1);
-        double frontLeftPower = ((y + x + rx) / (denominator)*speed);
-        double backLeftPower = ((y - x + rx) / (denominator)*speed);
-        double frontRightPower = ((y - x - rx) / (denominator)*speed);
-        double backRightPower = ((y + x - rx) / (denominator)*speed);
+        // Denominator is the largest motor power (absolute value) or 1
+        // This ensures all the powers maintain the same ratio,
+        // but only if at least one is out of the range [-1, 1]
+        double denominator = Math.max(Math.abs(y) + Math.abs(x) + Math.abs(rx), 1);
+        double frontLeftPower = (y + x + rx) / denominator;
+        double backLeftPower = (y - x + rx) / denominator;
+        double frontRightPower = (y - x - rx) / denominator;
+        double backRightPower = (y + x - rx) / denominator;
+
+
 
 
 
@@ -230,12 +303,41 @@ public class MechaDrive extends OpMode {
 
 
 
+
+
         // Show motor power on telemetry
         telemetry.addData("FL Power", frontLeftPower);
         telemetry.addData("FR Power", frontRightPower);
         telemetry.addData("BL Power", backLeftPower);
         telemetry.addData("BR Power", backRightPower);
         telemetry.addData("drone: ", dronePos);
+
+
+        telemetry.addData("Encoder PositionFL", positionFL);
+//        telemetry.addData("Encoder RevolutionsFL", revolutionsFL);
+//        telemetry.addData("Encoder Angle (Degrees)FL", angleFL);
+//        telemetry.addData("Encoder Angle - Normalized (Degrees)FL", angleNormalizedFL);
+//        telemetry.addData("Linear DistanceFL", distanceFL);
+
+        telemetry.addData("Encoder PositionFR", positionFR);
+//        telemetry.addData("Encoder RevolutionsFR", revolutionsFR);
+//        telemetry.addData("Encoder Angle (Degrees)FR", angleFR);
+//        telemetry.addData("Encoder Angle - Normalized (Degrees)FR", angleNormalizedFR);
+//        telemetry.addData("Linear DistanceFR", distanceFR);
+
+        telemetry.addData("Encoder PositionBL", positionBL);
+//        telemetry.addData("Encoder RevolutionsBL", revolutionsBL);
+//        telemetry.addData("Encoder Angle (Degrees)BL", angleBL);
+//        telemetry.addData("Encoder Angle - Normalized (Degrees)BL", angleNormalizedBL);
+//        telemetry.addData("Linear DistanceBL", distanceBL);
+
+        telemetry.addData("Encoder PositionBR", positionBR);
+//        telemetry.addData("Encoder RevolutionsBR", revolutionsBR);
+//        telemetry.addData("Encoder Angle (Degrees)BR", angleFL);
+//        telemetry.addData("Encoder Angle - Normalized (Degrees)BR", angleNormalizedBR);
+//        telemetry.addData("Linear DistanceBR", distanceBR);
+
+
         telemetry.update();
 
 

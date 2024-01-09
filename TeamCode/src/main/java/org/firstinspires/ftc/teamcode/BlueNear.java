@@ -14,7 +14,7 @@ import org.opencv.core.Rect;
 
 
 
-@Autonomous(name = "BlueNear", group="Auto")
+//@Autonomous(name = "BlueNear", group="Auto")
 public class BlueNear extends LinearOpMode {
 
     private DcMotor frontLeft = null;
