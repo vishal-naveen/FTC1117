@@ -13,8 +13,8 @@ import org.firstinspires.ftc.vision.VisionPortal;
 import org.opencv.core.Rect;
 
 
-//@Autonomous(name="encoderBlueNear", group="Blue")
-public class encoderconfig extends LinearOpMode {
+@Autonomous(name="encoderBlueFar", group="Blue")
+public class encoderBlueFar extends LinearOpMode {
     HardwarePushbot         robot   = new HardwarePushbot();   // Use the hardware file
     private ElapsedTime     runtime = new ElapsedTime();
 
@@ -88,10 +88,48 @@ public class encoderconfig extends LinearOpMode {
         while(!detector.isDetectionConfident()) {}
         switch (detector.getDetection()){
             case NONE:
+                encoderDrive(0.5,22,22,22,22,0.5);
+                setZero(250);
+                turnLeft(0.5,19.75,19.75,19.75,19.75,0.5);
+                setZero(250);
+                encoderDrive(0.4,8.5,8.5,8.5,8.5,0.2);
+                setZero(250);
+                encoderDrive(0.4,-8.5,-8.5,-8.5,-8.5,0.2);
+                setZero(250);
+                turnRight(0.5,19.75,19.75,19.75,19.75,0.5);
+                setZero(250);
+                encoderDrive(0.6,-19,-19,-19,-19,0.2);
+                setZero(250);
+                turnLeft(0.5,19.75,19.75,19.75,19.75,0.5);
+                setZero(250);
+                encoderDrive(0.8,87,87,87,87,0.2);
                 break;
             case MIDDLE:
+                encoderDrive(0.5,32.5,32.5,32.5,32.5,0.2);
+                setZero(250);
+                encoderDrive(0.5,-28,-28,-28,-28,0.2);
+                setZero(250);
+                turnLeft(0.5,19.75,19.75,19.75,19.75,0.2);
+                setZero(250);
+                encoderDrive(0.8,87,87,87,87,0.2);
+                setZero(250);
                 break;
             case RIGHT:
+                encoderDrive(0.5,22,22,22,22,0.5);
+                setZero(250);
+                turnRight(0.5,19.75,19.75,19.75,19.75,0.5);
+                setZero(250);
+                encoderDrive(0.4,8.5,8.5,8.5,8.5,0.2);
+                setZero(250);
+                encoderDrive(0.4,-8.5,-8.5,-8.5,-8.5,0.2);
+                setZero(250);
+                turnLeft(0.5,19.75,19.75,19.75,19.75,0.5);
+                setZero(250);
+                encoderDrive(0.6,-19,-19,-19,-19,0.2);
+                setZero(250);
+                turnLeft(0.5,19.75,19.75,19.75,19.75,0.5);
+                setZero(250);
+                encoderDrive(0.8,87,87,87,87,0.2);
                 break;
         }
 

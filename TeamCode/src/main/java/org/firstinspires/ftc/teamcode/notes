@@ -1,0 +1,12 @@
+
+ Testing Full and 90 degree rotations
+ - 83 is full rotation
+ - 19.75 is 90 degree
+        encoderDrive(0.4,-79,79,-79,79,6.0);
+        setZero(1000);
+        encoderDrive(0.4,79,-79,79,-79,6.0);
+        setZero(1000);
+        encoderDrive(0.4,-19.75,19.75,-19.75,19.75,6.0);
+        setZero(1000);
+        encoderDrive(0.4,19.75,-19.75,19.75,-19.75,6.0);
+        setZero(1000);

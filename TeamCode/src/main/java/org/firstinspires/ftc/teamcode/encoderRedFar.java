@@ -13,8 +13,8 @@ import org.firstinspires.ftc.vision.VisionPortal;
 import org.opencv.core.Rect;
 
 
-//@Autonomous(name="encoderBlueNear", group="Blue")
-public class encoderconfig extends LinearOpMode {
+@Autonomous(name="encoderRedFar", group="Blue")
+public class encoderRedFar extends LinearOpMode {
     HardwarePushbot         robot   = new HardwarePushbot();   // Use the hardware file
     private ElapsedTime     runtime = new ElapsedTime();
 
@@ -72,7 +72,7 @@ public class encoderconfig extends LinearOpMode {
         Rect leftZone = centerRect(0,0,0,0);
         Rect midZone = centerRect(190,280,140,150);
         Rect rightZone = centerRect(535,310,140,200);
-        detector = new ColorDetector(telemetry, ColorDetector.TargetColor.BLUE, ColorDetector.ViewMode.RAW, leftZone, midZone, rightZone);
+        detector = new ColorDetector(telemetry, ColorDetector.TargetColor.RED, ColorDetector.ViewMode.RAW, leftZone, midZone, rightZone);
         visionPoral = VisionPortal.easyCreateWithDefaults(hardwareMap.get(WebcamName.class, "Webcam 1"), detector);
         CameraStreamServer.getInstance().setSource(detector);
 
@@ -88,10 +88,48 @@ public class encoderconfig extends LinearOpMode {
         while(!detector.isDetectionConfident()) {}
         switch (detector.getDetection()){
             case NONE:
+                encoderDrive(0.5,22,22,22,22,0.5);
+                setZero(250);
+                turnLeft(0.5,19.75,19.75,19.75,19.75,0.5);
+                setZero(250);
+                encoderDrive(0.4,8.5,8.5,8.5,8.5,0.2);
+                setZero(250);
+                encoderDrive(0.4,-8.5,-8.5,-8.5,-8.5,0.2);
+                setZero(250);
+                turnRight(0.5,19.75,19.75,19.75,19.75,0.5);
+                setZero(250);
+                encoderDrive(0.6,-19,-19,-19,-19,0.2);
+                setZero(250);
+                turnRight(0.5,19.75,19.75,19.75,19.75,0.5);
+                setZero(250);
+                encoderDrive(0.8,87,87,87,87,0.2);
                 break;
             case MIDDLE:
+                encoderDrive(0.5,32.5,32.5,32.5,32.5,0.2);
+                setZero(250);
+                encoderDrive(0.5,-28,-28,-28,-28,0.2);
+                setZero(250);
+                turnRight(0.5,19.75,19.75,19.75,19.75,0.2);
+                setZero(250);
+                encoderDrive(0.8,87,87,87,87,0.2);
+                setZero(250);
                 break;
             case RIGHT:
+                encoderDrive(0.5,22,22,22,22,0.5);
+                setZero(250);
+                turnRight(0.5,19.75,19.75,19.75,19.75,0.5);
+                setZero(250);
+                encoderDrive(0.4,8.5,8.5,8.5,8.5,0.2);
+                setZero(250);
+                encoderDrive(0.4,-8.5,-8.5,-8.5,-8.5,0.2);
+                setZero(250);
+                turnLeft(0.5,19.75,19.75,19.75,19.75,0.5);
+                setZero(250);
+                encoderDrive(0.6,-19,-19,-19,-19,0.2);
+                setZero(250);
+                turnRight(0.5,19.75,19.75,19.75,19.75,0.5);
+                setZero(250);
+                encoderDrive(0.8,87,87,87,87,0.2);
                 break;
         }
 
