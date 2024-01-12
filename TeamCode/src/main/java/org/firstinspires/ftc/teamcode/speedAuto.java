@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 
-//@Autonomous(name="speedAuto", group="Test")
+@Autonomous(name="speedAuto", group="Test")
 
 
 public class speedAuto extends LinearOpMode {

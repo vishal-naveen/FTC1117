@@ -26,8 +26,9 @@ public class encoderRedNear extends LinearOpMode {
     static final double     WHEEL_DIAMETER_INCHES   = 3.77953 ;     // For figuring circumference
     static final double     COUNTS_PER_INCH         = (COUNTS_PER_MOTOR_REV * DRIVE_GEAR_REDUCTION) /
             (WHEEL_DIAMETER_INCHES * 3.1415);
+
     static final double     DRIVE_SPEED             = 0.6;
-    static final double     TURN_SPEED              = 0.5;
+    static final double     TURN_SPEED              = 10;
 
     static final double nientyTurn = 19.75;
 
@@ -81,6 +82,8 @@ public class encoderRedNear extends LinearOpMode {
 
         telemetry.update();
 
+        robot.armServo.setPosition(0.4);
+
 
 
         waitForStart();
@@ -88,48 +91,52 @@ public class encoderRedNear extends LinearOpMode {
         while(!detector.isDetectionConfident()) {}
         switch (detector.getDetection()){
             case NONE:
-                encoderDrive(0.5,22,22,22,22,0.5);
+                encoderDrive(0.7,23,23,23,23,10);
                 setZero(250);
-                turnLeft(0.5,19.75,19.75,19.75,19.75,0.5);
+                turnLeft(0.3,19.75,19.75,19.75,19.75,10);
                 setZero(250);
-                encoderDrive(0.4,8.5,8.5,8.5,8.5,0.2);
+                encoderDrive(0.4,4,4,4,4,10);
                 setZero(250);
-                encoderDrive(0.4,-8.5,-8.5,-8.5,-8.5,0.2);
+                encoderDrive(1,-9.5,-9.5,-9.5,-9.5,10);
                 setZero(250);
-                turnRight(0.5,19.75,19.75,19.75,19.75,0.5);
+                turnRight(0.7,35,35,35,35,10);
                 setZero(250);
-                encoderDrive(0.6,-19,-19,-19,-19,0.2);
+                encoderDrive(1,29,29,29,29,10);
                 setZero(250);
-                turnRight(0.5,19.75,19.75,19.75,19.75,0.5);
-                setZero(250);
-                encoderDrive(0.8,43,43,43,43,0.2);
+                robot.armServo.setPosition(0.1);
                 break;
             case MIDDLE:
-                encoderDrive(0.5,32.5,32.5,32.5,32.5,0.2);
+//                encoderDrive(0.5,30.5,30.5,30.5,30.5,10);
+//                setZero(250);
+//                encoderDrive(0.5,-26,-26,-26,-26,10);
+//                setZero(250);
+//                turnRight(0.5,18.75,18.75,18.75,18.75,10);
+//                setZero(250);
+//                encoderDrive(0.8,43,43,43,43,10);
+//                setZero(250);
+                encoderDrive(0.5,29.5,29.5,29.5,29.5,10);
                 setZero(250);
-                encoderDrive(0.5,-28,-28,-28,-28,0.2);
+                encoderDrive(1,-6,-6,-6,-6,10);
                 setZero(250);
-                turnRight(0.5,19.75,19.75,19.75,19.75,0.2);
+                turnRight(0.7,19.2,19.2,19.2,19.2,10);
                 setZero(250);
-                encoderDrive(0.8,43,43,43,43,0.2);
+                encoderDrive(1,34,34,34,34,10);
                 setZero(250);
+                robot.armServo.setPosition(0.1);
                 break;
             case RIGHT:
-                encoderDrive(0.5,22,22,22,22,0.5);
+                encoderDrive(0.5,10,10,10,10,10);
                 setZero(250);
-                turnRight(0.5,19.75,19.75,19.75,19.75,0.5);
+                turnRight(0.4,7.5,7.5,7.5,7.5,10);
                 setZero(250);
-                encoderDrive(0.4,8.5,8.5,8.5,8.5,0.2);
+                encoderDrive(0.6,12,12,12,12,10);
                 setZero(250);
-                encoderDrive(0.4,-8.5,-8.5,-8.5,-8.5,0.2);
+                encoderDrive(1,-12,-12,-12,-12,10);
                 setZero(250);
-                turnLeft(0.5,19.75,19.75,19.75,19.75,0.5);
+                turnRight(0.5,8,8,8,8,10);
                 setZero(250);
-                encoderDrive(0.6,-19,-19,-19,-19,0.2);
-                setZero(250);
-                turnRight(0.5,19.75,19.75,19.75,19.75,0.5);
-                setZero(250);
-                encoderDrive(0.8,43,43,43,43,0.2);
+                encoderDrive(0.6,36,36,36,36,10);
+                robot.armServo.setPosition(0.1);
                 break;
         }
 
@@ -213,6 +220,86 @@ public class encoderRedNear extends LinearOpMode {
         }
     }
 
+
+    public void testEncoderDrive(double speed,
+                                 double frontleftInches, double frontrightInches, double backleftInches, double backrightInches,
+                                 double timeoutS){
+
+
+        // Ensure that the opmode is still active
+        if (opModeIsActive()) {
+
+            // Determine new target position, and pass to motor controller
+//            newFrontLeftTarget = robot.frontLeft.getCurrentPosition() + (int)(frontleftInches * COUNTS_PER_INCH);
+//            newFrontRightTarget = robot.frontRight.getCurrentPosition() + (int)(frontrightInches * COUNTS_PER_INCH);
+//            newBackLeftTarget = robot.backLeft.getCurrentPosition() + (int)(backleftInches * COUNTS_PER_INCH);
+//            newBackRightTarget = robot.backRight.getCurrentPosition() + (int)(backrightInches * COUNTS_PER_INCH);
+
+            int frontleftEncoderCounts = (int) frontleftInches;
+            int frontrightEncoderCounts = (int) frontrightInches;
+            int backleftEncoderCounts = (int) backleftInches;
+            int backrightEncoderCounts = (int) backrightInches;
+
+            int newFrontLeftTarget = (int) newInchCalc(frontleftEncoderCounts);
+            int newFrontRightTarget = (int) newInchCalc(frontrightEncoderCounts);
+            int newBackLeftTarget = (int) newInchCalc(backleftEncoderCounts);
+            int newBackRightTarget = (int) newInchCalc(backrightEncoderCounts);
+
+
+            robot.frontLeft.setTargetPosition(newFrontLeftTarget);
+            robot.frontRight.setTargetPosition(newFrontRightTarget);
+            robot.backLeft.setTargetPosition(newBackLeftTarget);
+            robot.backRight.setTargetPosition(newBackRightTarget);
+
+            // Turn On RUN_TO_POSITION
+            robot.frontLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            robot.frontRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            robot.backLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            robot.backRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+            // reset the timeout time and start motion.
+            runtime.reset();
+            robot.frontLeft.setPower(Math.abs(speed));
+            robot.frontRight.setPower(Math.abs(speed));
+            robot.backLeft.setPower(Math.abs(speed));
+            robot.backRight.setPower(Math.abs(speed));
+
+            // keep looping while we are still active, and there is time left, and both motors are running.
+            // Note: We use (isBusy() && isBusy()) in the loop test, which means that when EITHER motor hits
+            // its target position, the motion will stop.  This is "safer" in the event that the robot will
+            // always end the motion as soon as possible.
+            // However, if you require that BOTH motors have finished their moves before the robot continues
+            // onto the next step, use (isBusy() || isBusy()) in the loop test.
+            while (opModeIsActive() &&
+                    (runtime.seconds() < timeoutS) &&
+                    (robot.frontLeft.isBusy() && robot.frontRight.isBusy() && robot.backLeft.isBusy() && robot.backRight.isBusy())) {
+
+                // Display it for the driver.
+//                telemetry.addData("Path1",  "Running to %7d :%7d", newFrontLeftTarget, newFrontRightTarget, newBackLeftTarget, newBackRightTarget);
+//                telemetry.addData("Path2",  "Running at %7d :%7d",
+//                        robot.frontLeft.getCurrentPosition(),
+//                        robot.frontRight.getCurrentPosition(),
+//                        robot.backLeft.getCurrentPosition(),
+//                        robot.backRight.getCurrentPosition()
+//                );
+                telemetry.update();
+            }
+
+            // Stop all motion;
+            robot.frontLeft.setPower(0);
+            robot.frontRight.setPower(0);
+            robot.backLeft.setPower(0);
+            robot.backRight.setPower(0);
+
+            // Turn off RUN_TO_POSITION
+            robot.frontLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            robot.frontRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            robot.backLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            robot.backRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+            //  sleep(250);   // optional pause after each move
+        }
+    }
 
 
     public void turnRight(double speed,
@@ -370,6 +457,12 @@ public class encoderRedNear extends LinearOpMode {
 
         sleep(timer);
     }
+
+    public double newInchCalc(double encoderCounts){
+        double distance = (encoderCounts / COUNTS_PER_MOTOR_REV) * WHEEL_DIAMETER_INCHES;
+        return distance;
+    }
+
 
 //    public void strafeLeft(double speed,
 //                           double frontleftInches, double frontrightInches, double backleftInches, double backrightInches,

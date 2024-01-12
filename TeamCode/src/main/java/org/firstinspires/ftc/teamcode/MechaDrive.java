@@ -22,16 +22,20 @@ public class MechaDrive extends OpMode {
 
     public Servo hangServo;
 
-    public Servo armServo1;
+    public Servo armServo;
+
+    public DcMotor hangMotor1 = null;
+
+    public DcMotor hangMotor2 = null;
 
     private DcMotor frontLeft = null;
     private DcMotor frontRight = null;
     private DcMotor backLeft = null;
     private DcMotor backRight = null;
 
-    public DcMotor hangMotor = null;
+//    public DcMotor hangMotor = null;
 
-    public DcMotor liftHMotor = null;
+//    public DcMotor liftHMotor = null;
 
 
 
@@ -57,28 +61,33 @@ public class MechaDrive extends OpMode {
 
         frontLeft.setDirection(DcMotorSimple.Direction.REVERSE);
         backLeft.setDirection(DcMotorSimple.Direction.REVERSE);
-        backRight.setDirection(DcMotorSimple.Direction.REVERSE);
+        frontRight.setDirection(DcMotorSimple.Direction.REVERSE);
+
 
         droneServo = hardwareMap.get(Servo.class, "droneServo");
 
         hangServo = hardwareMap.get(Servo.class, "hangServo");
 
-        armServo1 = hardwareMap.get(Servo.class, "armServo1");
+        armServo = hardwareMap.get(Servo.class, "armServo");
 
-        hangMotor = hardwareMap.get(DcMotor.class, "hangMotor");
+//        hangMotor = hardwareMap.get(DcMotor.class, "hangMotor");
 
-        liftHMotor = hardwareMap.get(DcMotor.class, "liftHMotor");
+//        liftHMotor = hardwareMap.get(DcMotor.class, "liftHMotor");
+
+
+        hangMotor1 = hardwareMap.get(DcMotor.class, "hangMotor1");
+        hangMotor2 = hardwareMap.get(DcMotor.class, "hangMotor2");
 
 
 
 //        liftServo1 = hardwareMap.get(Servo.class, "liftServo1");
 //        liftServo2 = hardwareMap.get(Servo.class, "liftServo2");
 
-        droneServo.setPosition(0.4);
+        droneServo.setPosition(0.6);
 
         hangServo.setPosition(0.5);
 
-        armServo1.setPosition(0.2);
+        armServo.setPosition(0.4);
 
 //        frontLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 //        frontRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -137,41 +146,38 @@ public class MechaDrive extends OpMode {
 
 
 
-        if (gamepad2.left_bumper){
-            droneServo.setPosition(0.7);
+        if (gamepad2.y){
+            droneServo.setPosition(0.9);
         }
 
 
-        if(gamepad2.a){
-            armServo1.setPosition(0.9);
-        }
-
-        if(gamepad2.b){
-            armServo1.setPosition(0.1);
-        }
 
 
 
 
         if(gamepad2.dpad_right){
-            hangMotor.setPower(1);
+            hangMotor1.setPower(1);
+            hangMotor2.setPower(1);
         }
-        hangMotor.setPower(0);
+        hangMotor1.setPower(0);
+        hangMotor2.setPower(0);
 
         if(gamepad2.dpad_left){
-            hangMotor.setPower(-1);
+            hangMotor1.setPower(-1);
+            hangMotor2.setPower(-1);
         }
-        hangMotor.setPower(0);
+        hangMotor1.setPower(0);
+        hangMotor2.setPower(0);
 
-        if(gamepad2.dpad_up){
-            liftHMotor.setPower(-1);
-        }
-        liftHMotor.setPower(0);
-
-        if(gamepad2.dpad_down){
-            liftHMotor.setPower(1);
-        }
-        liftHMotor.setPower(0);
+//        if(gamepad2.dpad_up){
+//            liftHMotor.setPower(-1);
+//        }
+//        liftHMotor.setPower(0);
+//
+//        if(gamepad2.dpad_down){
+//            liftHMotor.setPower(1);
+//        }
+//        liftHMotor.setPower(0);
 
 
 

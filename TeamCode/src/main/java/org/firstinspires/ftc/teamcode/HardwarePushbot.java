@@ -16,6 +16,8 @@ public class HardwarePushbot
     public DcMotor  backLeft    = null;
     public DcMotor  backRight    = null;
 
+    public Servo armServo;
+
 
 //    public Servo    spike    = null;
 //    public ColorSensor colorSensor = null;
@@ -50,15 +52,18 @@ public class HardwarePushbot
         backLeft = hwMap.get(DcMotor.class,  "BL");
         backRight = hwMap.get(DcMotor.class, "BR");
 
-        frontLeft.setDirection(DcMotor.Direction.REVERSE); // Set to REVERSE if using AndyMark motors
-        frontRight.setDirection(DcMotor.Direction.FORWARD);// Set to FORWARD if using AndyMark motors
+        armServo = hwMap.get(Servo.class, "armServo");
+
+        frontLeft.setDirection(DcMotorSimple.Direction.REVERSE);
+        backLeft.setDirection(DcMotorSimple.Direction.REVERSE);
+        frontRight.setDirection(DcMotorSimple.Direction.REVERSE);
+
         frontLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         frontRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        // Back Motors
-        backLeft.setDirection(DcMotorSimple.Direction.REVERSE);
-//        backRight.setDirection(DcMotorSimple.Direction.REVERSE);
         backLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         backRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
+
 
 
         // Set all motors to zero power
