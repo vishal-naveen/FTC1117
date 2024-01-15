@@ -24,9 +24,7 @@ public class MechaDrive extends OpMode {
 
     public Servo armServo;
 
-    public DcMotor hangMotor1 = null;
-
-    public DcMotor hangMotor2 = null;
+    public DcMotor hangMotor = null;
 
     private DcMotor frontLeft = null;
     private DcMotor frontRight = null;
@@ -75,17 +73,16 @@ public class MechaDrive extends OpMode {
 //        liftHMotor = hardwareMap.get(DcMotor.class, "liftHMotor");
 
 
-        hangMotor1 = hardwareMap.get(DcMotor.class, "hangMotor1");
-        hangMotor2 = hardwareMap.get(DcMotor.class, "hangMotor2");
-
+        hangMotor = hardwareMap.get(DcMotor.class, "hangMotor1");
 
 
 //        liftServo1 = hardwareMap.get(Servo.class, "liftServo1");
 //        liftServo2 = hardwareMap.get(Servo.class, "liftServo2");
 
-        droneServo.setPosition(0.6);
+        droneServo.setPosition(0.4);
 
-        hangServo.setPosition(0.5);
+        hangServo.setPosition(0.4);
+
 
         armServo.setPosition(0.4);
 
@@ -146,8 +143,12 @@ public class MechaDrive extends OpMode {
 
 
 
-        if (gamepad2.y){
-            droneServo.setPosition(0.9);
+        if(gamepad2.y){
+            hangServo.setPosition(0.4);
+        }
+
+        if(gamepad2.a){
+            droneServo.setPosition(0.7);
         }
 
 
@@ -156,18 +157,14 @@ public class MechaDrive extends OpMode {
 
 
         if(gamepad2.dpad_right){
-            hangMotor1.setPower(1);
-            hangMotor2.setPower(1);
+            hangMotor.setPower(1);
         }
-        hangMotor1.setPower(0);
-        hangMotor2.setPower(0);
+        hangMotor.setPower(0);
 
         if(gamepad2.dpad_left){
-            hangMotor1.setPower(-1);
-            hangMotor2.setPower(-1);
+            hangMotor.setPower(-1);
         }
-        hangMotor1.setPower(0);
-        hangMotor2.setPower(0);
+        hangMotor.setPower(0);
 
 //        if(gamepad2.dpad_up){
 //            liftHMotor.setPower(-1);

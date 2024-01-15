@@ -18,6 +18,8 @@ public class encoderBlueFar extends LinearOpMode {
     HardwarePushbot         robot   = new HardwarePushbot();   // Use the hardware file
     private ElapsedTime     runtime = new ElapsedTime();
 
+    public DcMotor placerMotor = null;
+
     ColorDetector detector;
 
     VisionPortal visionPoral;
@@ -60,6 +62,8 @@ public class encoderBlueFar extends LinearOpMode {
         robot.backLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         robot.backRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
+        placerMotor = hardwareMap.get(DcMotor.class,"placerMotor");
+
         telemetry.addData("Path0",  "Starting at %7d :%7d",
                 robot.frontLeft.getCurrentPosition(),
                 robot.frontRight.getCurrentPosition(),
@@ -99,24 +103,26 @@ public class encoderBlueFar extends LinearOpMode {
                 setZero(250);
                 encoderDrive(0.4,-4.5,-4.5,-4.5,-4.5,10);
                 setZero(250);
-                turnRight(0.5,19.75,19.75,19.75,19.75,10);
-                setZero(250);
-                encoderDrive(0.6,-21.5,-21.5,-21.5,-21.5,10);
-                setZero(250);
-                turnLeft(0.5,22,22,21.5,21.5,10);
-                setZero(250);
-                encoderDrive(0.8,87,87,87,87,10);
-                robot.armServo.setPosition(0.1);
+//                turnRight(0.5,19.75,19.75,19.75,19.75,10);
+//                setZero(250);
+//                encoderDrive(0.6,-21.5,-21.5,-21.5,-21.5,10);
+//                setZero(250);
+//                turnLeft(0.5,22,22,21.5,21.5,10);
+//                setZero(250);
+//                encoderDrive(0.8,87,87,87,87,10);
+//                setZero(1000);
+//                robot.armServo.setPosition(-0.8);
                 break;
             case MIDDLE:
                 encoderDrive(0.5,30.5,30.5,30.5,30.5,10);
                 setZero(250);
                 encoderDrive(0.5,-26,-26,-26,-26,10);
                 setZero(250);
-                turnLeft(0.5,19,19,19,19,10);
-                setZero(250);
-                encoderDrive(0.8,87,87,87,87,10);
-                robot.armServo.setPosition(0.1);
+//                turnLeft(0.5,19,19,19,19,10);
+//                setZero(250);
+//                encoderDrive(0.8,87,87,87,87,10);
+//                setZero(1000);
+//                robot.armServo.setPosition(-0.8);
                 break;
             case RIGHT:
                 encoderDrive(0.5,26,26,26,26,10);
@@ -127,14 +133,15 @@ public class encoderBlueFar extends LinearOpMode {
                 setZero(250);
                 encoderDrive(0.4,-3.5,-3.5,-3.5,-3.5,10);
                 setZero(250);
-                turnLeft(0.5,19.75,19.75,19.75,19.75,10);
-                setZero(250);
-                encoderDrive(0.6,-21,-21,-21,-21,10);
-                setZero(250);
-                turnLeft(0.5,19.2,19.2,19.2,19.2,10);
-                setZero(250);
-                encoderDrive(0.8,87,87,87,87,10);
-                robot.armServo.setPosition(0.1);
+//                turnLeft(0.5,19.75,19.75,19.75,19.75,10);
+//                setZero(250);
+//                encoderDrive(0.6,-21,-21,-21,-21,10);
+//                setZero(250);
+//                turnLeft(0.5,19.2,19.2,19.2,19.2,10);
+//                setZero(250);
+//                encoderDrive(0.8,87,87,87,87,10);
+//                setZero(1000);
+//                robot.armServo.setPosition(-0.8);
                 break;
         }
 
@@ -453,12 +460,20 @@ public class encoderBlueFar extends LinearOpMode {
         robot.backLeft.setPower(0);
         robot.backRight.setPower(0);
 
+        robot.placerMotor.setPower(0);
+
         sleep(timer);
     }
 
     public double newInchCalc(double encoderCounts){
         double distance = (encoderCounts / COUNTS_PER_MOTOR_REV) * WHEEL_DIAMETER_INCHES;
         return distance;
+    }
+
+    public void placerMotorTurn(double power, long time){
+        placerMotor.setPower(power);
+
+        sleep(time);
     }
 
 

@@ -16,6 +16,8 @@ public class HardwarePushbot
     public DcMotor  backLeft    = null;
     public DcMotor  backRight    = null;
 
+    public DcMotor placerMotor = null;
+
     public Servo armServo;
 
 
@@ -52,6 +54,8 @@ public class HardwarePushbot
         backLeft = hwMap.get(DcMotor.class,  "BL");
         backRight = hwMap.get(DcMotor.class, "BR");
 
+        placerMotor = hwMap.get(DcMotor.class,"placerMotor");
+
         armServo = hwMap.get(Servo.class, "armServo");
 
         frontLeft.setDirection(DcMotorSimple.Direction.REVERSE);
@@ -71,6 +75,8 @@ public class HardwarePushbot
         frontRight.setPower(0);
         backLeft.setPower(0);
         backRight.setPower(0);
+
+        placerMotor.setPower(0);
 
         // Set all motors to run without encoders.
         // May want to use RUN_USING_ENCODERS if encoders are installed.

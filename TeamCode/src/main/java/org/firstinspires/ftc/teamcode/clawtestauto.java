@@ -13,12 +13,12 @@ import org.firstinspires.ftc.vision.VisionPortal;
 import org.opencv.core.Rect;
 
 
-@Autonomous(name="encoderRedFar", group="Red")
-public class encoderRedFar extends LinearOpMode {
-    HardwarePushbot         robot   = new HardwarePushbot();   // Use the hardware file
-    private ElapsedTime     runtime = new ElapsedTime();
+@Autonomous(name="clawtestauto", group="Test")
+public class clawtestauto extends LinearOpMode {
 
     public DcMotor placerMotor = null;
+    HardwarePushbot         robot   = new HardwarePushbot();   // Use the hardware file
+    private ElapsedTime     runtime = new ElapsedTime();
 
     ColorDetector detector;
 
@@ -77,7 +77,7 @@ public class encoderRedFar extends LinearOpMode {
         Rect leftZone = centerRect(0,0,0,0);
         Rect midZone = centerRect(190,280,140,150);
         Rect rightZone = centerRect(535,310,140,200);
-        detector = new ColorDetector(telemetry, ColorDetector.TargetColor.RED, ColorDetector.ViewMode.RAW, leftZone, midZone, rightZone);
+        detector = new ColorDetector(telemetry, ColorDetector.TargetColor.BLUE, ColorDetector.ViewMode.RAW, leftZone, midZone, rightZone);
         visionPoral = VisionPortal.easyCreateWithDefaults(hardwareMap.get(WebcamName.class, "Webcam 1"), detector);
         CameraStreamServer.getInstance().setSource(detector);
 
@@ -86,7 +86,7 @@ public class encoderRedFar extends LinearOpMode {
 
         telemetry.update();
 
-        robot.armServo.setPosition(0.4);
+        robot.armServo.setPosition(0.3);
 
 
 
@@ -95,53 +95,15 @@ public class encoderRedFar extends LinearOpMode {
         while(!detector.isDetectionConfident()) {}
         switch (detector.getDetection()){
             case NONE:
-                encoderDrive(0.5,22,22,22,22,10);
-                setZero(250);
-                turnLeft(0.5,19.75,19.75,19.75,19.75,10);
-                setZero(250);
-                encoderDrive(0.4,4.5,4.5,4.5,4.5,10);
-                setZero(250);
-                encoderDrive(0.4,-5,-5,-5,-5,10);
-                setZero(250);
-//                turnRight(0.5,19.75,19.75,19.75,19.75,10);
-//                setZero(250);
-//                encoderDrive(0.6,-19,-19,-19,-19,10);
-//                setZero(250);
-//                turnRight(0.5,19.75,19.75,19.75,19.75,10);
-//                setZero(250);
-//                encoderDrive(0.8,87,87,87,87,10);
-//                setZero(1000);
-//                robot.armServo.setPosition(-0.8);
+                placerMotorTurn(0.2,350);
+                setZero(5000);
+                robot.armServo.setPosition(-0.8);
                 break;
             case MIDDLE:
-                encoderDrive(0.5,32.5,32.5,32.5,32.5,10);
-                setZero(250);
-                encoderDrive(0.5,-28,-28,-28,-28,10);
-                setZero(250);
-//                turnRight(0.5,19.75,19.75,19.75,19.75,10);
-//                setZero(250);
-//                encoderDrive(0.8,87,87,87,87,10);
-//                setZero(1000);
-//                robot.armServo.setPosition(-0.8);
+                robot.armServo.setPosition(0.1);
                 break;
             case RIGHT:
-                encoderDrive(0.5,24,24,24,24,10);
-                setZero(250);
-                turnRight(0.5,19.75,19.75,19.75,19.75,10);
-                setZero(250);
-                encoderDrive(0.4,4.5,4.5,4.5,4.5,10);
-                setZero(250);
-                encoderDrive(0.4,-5.5,-5.5,-5.5,-5.5,10);
-                setZero(250);
-//                turnLeft(0.5,19.75,19.75,19.75,19.75,10);
-//                setZero(250);
-//                encoderDrive(0.6,-19,-19,-19,-19,10);
-//                setZero(250);
-//                turnRight(0.5,19.75,19.75,19.75,19.75,10);
-//                setZero(250);
-//                encoderDrive(0.8,87,87,87,87,10);
-//                setZero(1000);
-//                robot.armServo.setPosition(-0.8);
+                robot.armServo.setPosition(0.1);
                 break;
         }
 
