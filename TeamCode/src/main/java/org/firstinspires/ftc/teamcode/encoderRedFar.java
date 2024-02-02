@@ -13,7 +13,7 @@ import org.firstinspires.ftc.vision.VisionPortal;
 import org.opencv.core.Rect;
 
 
-@Autonomous(name="encoderRedFar", group="Red")
+//@Autonomous(name="encoderRedFar", group="Red")
 public class encoderRedFar extends LinearOpMode {
     HardwarePushbot         robot   = new HardwarePushbot();   // Use the hardware file
     private ElapsedTime     runtime = new ElapsedTime();
@@ -86,7 +86,6 @@ public class encoderRedFar extends LinearOpMode {
 
         telemetry.update();
 
-        robot.armServo.setPosition(0.4);
 
 
 
@@ -460,7 +459,6 @@ public class encoderRedFar extends LinearOpMode {
         robot.backLeft.setPower(0);
         robot.backRight.setPower(0);
 
-        robot.placerMotor.setPower(0);
 
         sleep(timer);
     }

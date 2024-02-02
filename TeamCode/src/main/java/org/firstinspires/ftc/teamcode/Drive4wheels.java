@@ -15,23 +15,25 @@ import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.configuration.annotations.MotorType;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-//@TeleOp(name="maeldrive")
-public class maeldrive extends OpMode {
+@TeleOp(name="Drive4wheels")
+public class Drive4wheels extends OpMode {
 
-    public Servo droneServo;
-
-    public Servo hangServo;
-
-    public Servo armServo1;
+//    public Servo droneServo;
+//
+//    public Servo hangServo;
+//
+//    public Servo armServo;
+//
+//    public DcMotor hangMotor = null;
 
     private DcMotor frontLeft = null;
     private DcMotor frontRight = null;
     private DcMotor backLeft = null;
     private DcMotor backRight = null;
 
-    public DcMotor hangMotor = null;
+//    public DcMotor hangMotor = null;
 
-    public DcMotor liftHMotor = null;
+//    public DcMotor liftHMotor = null;
 
 
 
@@ -57,31 +59,32 @@ public class maeldrive extends OpMode {
 
         frontLeft.setDirection(DcMotorSimple.Direction.REVERSE);
         backLeft.setDirection(DcMotorSimple.Direction.REVERSE);
-//        backRight.setDirection(DcMotorSimple.Direction.REVERSE);
+        frontRight.setDirection(DcMotorSimple.Direction.REVERSE);
 
-//        frontRight.setDirection(DcMotorSimple.Direction.REVERSE);
-//        backLeft.setDirection(DcMotorSimple.Direction.REVERSE);
 
-        droneServo = hardwareMap.get(Servo.class, "droneServo");
+//        droneServo = hardwareMap.get(Servo.class, "droneServo");
+//
+//        hangServo = hardwareMap.get(Servo.class, "hangServo");
+//
+//        armServo = hardwareMap.get(Servo.class, "armServo");
 
-        hangServo = hardwareMap.get(Servo.class, "hangServo");
+//        hangMotor = hardwareMap.get(DcMotor.class, "hangMotor");
 
-        armServo1 = hardwareMap.get(Servo.class, "armServo1");
+//        liftHMotor = hardwareMap.get(DcMotor.class, "liftHMotor");
 
-        hangMotor = hardwareMap.get(DcMotor.class, "hangMotor");
 
-        liftHMotor = hardwareMap.get(DcMotor.class, "liftHMotor");
-
+//        hangMotor = hardwareMap.get(DcMotor.class, "hangMotor1");
 
 
 //        liftServo1 = hardwareMap.get(Servo.class, "liftServo1");
 //        liftServo2 = hardwareMap.get(Servo.class, "liftServo2");
 
-        droneServo.setPosition(0.4);
-
-        hangServo.setPosition(0.5);
-
-        armServo1.setPosition(0.2);
+//        droneServo.setPosition(0.4);
+//
+//        hangServo.setPosition(0.4);
+//
+//
+//        armServo.setPosition(0.4);
 
 //        frontLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 //        frontRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -140,41 +143,38 @@ public class maeldrive extends OpMode {
 
 
 
-        if (gamepad2.left_bumper){
-            droneServo.setPosition(0.7);
-        }
+//        if(gamepad2.y){
+//            hangServo.setPosition(0.4);
+//        }
+//
+//        if(gamepad2.a){
+//            droneServo.setPosition(0.7);
+//        }
+//
+//
+//
+//
+//
+//
+//        if(gamepad2.dpad_right){
+//            hangMotor.setPower(1);
+//        }
+//        hangMotor.setPower(0);
+//
+//        if(gamepad2.dpad_left){
+//            hangMotor.setPower(-1);
+//        }
+//        hangMotor.setPower(0);
 
-
-        if(gamepad2.a){
-            armServo1.setPosition(0.9);
-        }
-
-        if(gamepad2.b){
-            armServo1.setPosition(0.1);
-        }
-
-
-
-
-        if(gamepad2.dpad_right){
-            hangMotor.setPower(1);
-        }
-        hangMotor.setPower(0);
-
-        if(gamepad2.dpad_left){
-            hangMotor.setPower(-1);
-        }
-        hangMotor.setPower(0);
-
-        if(gamepad2.dpad_up){
-            liftHMotor.setPower(-1);
-        }
-        liftHMotor.setPower(0);
-
-        if(gamepad2.dpad_down){
-            liftHMotor.setPower(1);
-        }
-        liftHMotor.setPower(0);
+//        if(gamepad2.dpad_up){
+//            liftHMotor.setPower(-1);
+//        }
+//        liftHMotor.setPower(0);
+//
+//        if(gamepad2.dpad_down){
+//            liftHMotor.setPower(1);
+//        }
+//        liftHMotor.setPower(0);
 
 
 
@@ -204,7 +204,7 @@ public class maeldrive extends OpMode {
 //        double frontRightPower = ((y - x - rx) / (denominator)*speed);
 //        double backRightPower = ((y + x - rx) / (denominator)*speed);
 
-        double y = gamepad1.left_stick_y; // Remember, Y stick value is reversed
+        double y = -gamepad1.left_stick_y; // Remember, Y stick value is reversed
         double x = gamepad1.left_stick_x * 1.1; // Counteract imperfect strafing
         double rx = gamepad1.right_stick_x;
 
@@ -221,7 +221,7 @@ public class maeldrive extends OpMode {
 
 
 
-        double dronePos = droneServo.getPosition();
+//        double dronePos = droneServo.getPosition();
 
         frontLeft.setPower(frontLeftPower);
         backLeft.setPower(backLeftPower);
@@ -313,7 +313,7 @@ public class maeldrive extends OpMode {
         telemetry.addData("FR Power", frontRightPower);
         telemetry.addData("BL Power", backLeftPower);
         telemetry.addData("BR Power", backRightPower);
-        telemetry.addData("drone: ", dronePos);
+//        telemetry.addData("drone: ", dronePos);
 
 
         telemetry.addData("Encoder PositionFL", positionFL);

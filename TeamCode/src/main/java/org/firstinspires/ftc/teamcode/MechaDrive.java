@@ -4,6 +4,7 @@ package org.firstinspires.ftc.teamcode;
 
 import static org.opencv.core.Core.max;
 import static java.lang.Math.abs;
+import static java.lang.Math.min;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
@@ -18,18 +19,14 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 @TeleOp(name="MechaDrive")
 public class MechaDrive extends OpMode {
 
-    public Servo droneServo;
-
-    public Servo hangServo;
-
-    public Servo armServo;
-
-    public DcMotor hangMotor = null;
-
     private DcMotor frontLeft = null;
     private DcMotor frontRight = null;
     private DcMotor backLeft = null;
     private DcMotor backRight = null;
+
+    private DcMotor actuatorMotor = null;
+
+    private DcMotor actuatorMotor1 = null;
 
 //    public DcMotor hangMotor = null;
 
@@ -40,13 +37,21 @@ public class MechaDrive extends OpMode {
 //    private Servo liftServo1 = null;
 //    private Servo liftServo2 = null;
 
+    private  Servo clawServo1 = null;
+    private  Servo clawServo2 = null;
+    private  Servo wristServo = null;
 
+    int i = 0;
 
     double speed = 0.72;
 
 
 
+    boolean actuatormanual = false;
 
+    boolean clawServo1closed = false;
+    boolean clawServo2closed = false;
+    boolean wristServoDown = false;
 
     Gamepad prevGamepad1 = new Gamepad();
 
@@ -57,56 +62,36 @@ public class MechaDrive extends OpMode {
         backLeft = hardwareMap.get(DcMotor.class, "BL");
         backRight = hardwareMap.get(DcMotor.class, "BR");
 
+        actuatorMotor = hardwareMap.get(DcMotor.class, "actuatorMotor");
+        actuatorMotor1 = hardwareMap.get(DcMotor.class, "actuatorMotor1");
+
         frontLeft.setDirection(DcMotorSimple.Direction.REVERSE);
         backLeft.setDirection(DcMotorSimple.Direction.REVERSE);
         frontRight.setDirection(DcMotorSimple.Direction.REVERSE);
+        actuatorMotor.setDirection(DcMotorSimple.Direction.REVERSE);
+
+        clawServo1 = hardwareMap.get(Servo.class, "clawServo1");
+        clawServo2 = hardwareMap.get(Servo.class, "clawServo2");
+        wristServo = hardwareMap.get(Servo.class, "wristServo");
 
 
-        droneServo = hardwareMap.get(Servo.class, "droneServo");
-
-        hangServo = hardwareMap.get(Servo.class, "hangServo");
-
-        armServo = hardwareMap.get(Servo.class, "armServo");
-
-//        hangMotor = hardwareMap.get(DcMotor.class, "hangMotor");
-
-//        liftHMotor = hardwareMap.get(DcMotor.class, "liftHMotor");
+        clawServo1.setPosition(0.3);
+        clawServo2.setPosition(0.3);
+        wristServo.setPosition(0.89);
 
 
-        hangMotor = hardwareMap.get(DcMotor.class, "hangMotor1");
+        actuatorMotor1.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        actuatorMotor1.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
 
-//        liftServo1 = hardwareMap.get(Servo.class, "liftServo1");
-//        liftServo2 = hardwareMap.get(Servo.class, "liftServo2");
 
-        droneServo.setPosition(0.4);
-
-        hangServo.setPosition(0.4);
-
-
-        armServo.setPosition(0.4);
-
-//        frontLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-//        frontRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-//        backLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-//        backRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-
-//        frontLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-//        frontLeft.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-//
-//        frontRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-//        frontRight.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-//
-//        backLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-//        backLeft.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-//
-//        backRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-//        backRight.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
     }
 
 
     @Override
     public void loop() {
+
+
 
 //        double CPR = 537.6;
 //
@@ -143,74 +128,15 @@ public class MechaDrive extends OpMode {
 
 
 
-        if(gamepad2.y){
-            hangServo.setPosition(0.4);
-        }
-
-        if(gamepad2.a){
-            droneServo.setPosition(0.7);
-        }
 
 
 
 
-
-
-        if(gamepad2.dpad_right){
-            hangMotor.setPower(1);
-        }
-        hangMotor.setPower(0);
-
-        if(gamepad2.dpad_left){
-            hangMotor.setPower(-1);
-        }
-        hangMotor.setPower(0);
-
-//        if(gamepad2.dpad_up){
-//            liftHMotor.setPower(-1);
-//        }
-//        liftHMotor.setPower(0);
-//
-//        if(gamepad2.dpad_down){
-//            liftHMotor.setPower(1);
-//        }
-//        liftHMotor.setPower(0);
-
-
-
-
-
-//        if(gamepad1.dpad_down) {
-//            if (speed == 0.5) {
-//                speed = 1;
-//            } else if (speed == 1) {
-//                speed = 0.5;
-//            } else {
-//                speed = 0.5;
-//            }
-//        }
-
-
-
-
-
-//        double y = -gamepad1.left_stick_y;
-//        double x = gamepad1.left_stick_x;
-//        double rx = gamepad1.right_stick_x;
-//
-//        double denominator = Math.max(abs(y) + abs(x) + abs(rx), 1);
-//        double frontLeftPower = ((y + x + rx) / (denominator)*speed);
-//        double backLeftPower = ((y - x + rx) / (denominator)*speed);
-//        double frontRightPower = ((y - x - rx) / (denominator)*speed);
-//        double backRightPower = ((y + x - rx) / (denominator)*speed);
 
         double y = -gamepad1.left_stick_y; // Remember, Y stick value is reversed
         double x = gamepad1.left_stick_x * 1.1; // Counteract imperfect strafing
         double rx = gamepad1.right_stick_x;
 
-        // Denominator is the largest motor power (absolute value) or 1
-        // This ensures all the powers maintain the same ratio,
-        // but only if at least one is out of the range [-1, 1]
         double denominator = Math.max(Math.abs(y) + Math.abs(x) + Math.abs(rx), 1);
         double frontLeftPower = (y + x + rx) / denominator;
         double backLeftPower = (y - x + rx) / denominator;
@@ -218,15 +144,108 @@ public class MechaDrive extends OpMode {
         double backRightPower = (y + x - rx) / denominator;
 
 
-
-
-
-        double dronePos = droneServo.getPosition();
-
         frontLeft.setPower(frontLeftPower);
         backLeft.setPower(backLeftPower);
         frontRight.setPower(frontRightPower);
         backRight.setPower(backRightPower);
+
+
+
+
+        if(gamepad2.left_stick_y > 0.1){
+            actuatorMotor.setPower(-1);
+        }
+        if(gamepad2.left_stick_y < -0.1){
+            actuatorMotor.setPower(1);
+        }
+        else if(gamepad2.left_stick_y < 0.1 && gamepad2.left_stick_y > -0.1){
+            actuatorMotor.setPower(0);
+        }
+
+
+        if (gamepad2.left_bumper) {
+            actuatormanual = !actuatormanual;
+            if (actuatormanual) {
+                actuatorMotor1.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+            } else {
+                actuatorMotor1.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+                actuatorMotor1.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            }
+        }
+
+        if(gamepad2.a && !actuatormanual){
+            actuatorMotor1.setTargetPosition(-500);
+            actuatorMotor1.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            actuatorMotor1.setPower(0.4);
+        }
+        if(gamepad2.b && !actuatormanual){
+            actuatorMotor1.setTargetPosition(25);
+            actuatorMotor1.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            actuatorMotor1.setPower(0.1);
+        }
+        if(gamepad2.x && !actuatormanual){
+            actuatorMotor1.setTargetPosition(-625);
+            actuatorMotor1.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            actuatorMotor1.setPower(0.4);
+        }
+        if(gamepad2.y && !actuatormanual){
+            actuatorMotor1.setTargetPosition(-725);
+            actuatorMotor1.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            actuatorMotor1.setPower(0.4);
+        }
+
+        if(gamepad2.right_stick_y > 0.1 && actuatormanual){
+            actuatorMotor1.setPower(1);
+        }
+        if(gamepad2.right_stick_y < -0.1 && actuatormanual){
+            actuatorMotor1.setPower(-1);
+        }
+        else if(gamepad2.right_stick_y < 0.1 && gamepad2.right_stick_y > -0.1 && actuatormanual){
+            actuatorMotor1.setPower(0);
+        }
+
+//        if(gamepad2.a) {
+//            i = 1;
+//        }
+//
+//        while (i<2) {
+//            if(gamepad2.a && i == 1) {
+//                clawServo1.setPosition(0.5);
+//            } else if(!gamepad2.a) {
+//                clawServo1.setPosition(0.3);
+//                i = 0;
+//            }
+//        }
+//
+//
+//
+//        if (gamepad2.a && !clawServo1closed){
+//            clawServo1.setPosition(0.5);
+//            clawServo1closed = true;
+//        }
+//
+//        if (!gamepad2.a && clawServo1closed){
+//            clawServo1.setPosition(0.3);
+//            clawServo1closed = false;
+//        }
+
+        if (gamepad2.dpad_down){
+            clawServo2.setPosition(0.3);
+
+        }
+        if (gamepad2.dpad_left){
+            clawServo2.setPosition(0.4);
+        }
+
+        if (gamepad2.dpad_up){
+            wristServo.setPosition(0.2);
+        }
+        if (gamepad2.dpad_right){
+            wristServo.setPosition(0.3);
+        }
+
+
+
 
         if(gamepad1.left_bumper){
             frontLeft.setPower(-0.4);
@@ -308,12 +327,15 @@ public class MechaDrive extends OpMode {
 
 
 
+
+
+
         // Show motor power on telemetry
         telemetry.addData("FL Power", frontLeftPower);
         telemetry.addData("FR Power", frontRightPower);
         telemetry.addData("BL Power", backLeftPower);
         telemetry.addData("BR Power", backRightPower);
-        telemetry.addData("drone: ", dronePos);
+
 
 
         telemetry.addData("Encoder PositionFL", positionFL);
@@ -339,6 +361,10 @@ public class MechaDrive extends OpMode {
 //        telemetry.addData("Encoder Angle (Degrees)BR", angleFL);
 //        telemetry.addData("Encoder Angle - Normalized (Degrees)BR", angleNormalizedBR);
 //        telemetry.addData("Linear DistanceBR", distanceBR);
+
+        telemetry.addData("actuator:",actuatorMotor.getCurrentPosition());
+        telemetry.addData("angle:",actuatorMotor1.getCurrentPosition());
+        telemetry.addData("gamepad2:",gamepad2.left_stick_y);
 
 
         telemetry.update();

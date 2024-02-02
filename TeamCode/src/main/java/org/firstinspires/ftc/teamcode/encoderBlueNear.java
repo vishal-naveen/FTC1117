@@ -13,7 +13,7 @@ import org.firstinspires.ftc.vision.VisionPortal;
 import org.opencv.core.Rect;
 
 
-@Autonomous(name="encoderBlueNear", group="Blue")
+//@Autonomous(name="encoderBlueNear", group="Blue")
 public class encoderBlueNear extends LinearOpMode {
     HardwarePushbot         robot   = new HardwarePushbot();   // Use the hardware file
     private ElapsedTime     runtime = new ElapsedTime();
@@ -62,7 +62,6 @@ public class encoderBlueNear extends LinearOpMode {
         robot.backLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         robot.backRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
-        placerMotor = hardwareMap.get(DcMotor.class,"placerMotor");
 
         telemetry.addData("Path0",  "Starting at %7d :%7d",
                 robot.frontLeft.getCurrentPosition(),
@@ -86,7 +85,7 @@ public class encoderBlueNear extends LinearOpMode {
 
         telemetry.update();
 
-        robot.armServo.setPosition(0.15);
+//        robot.armServo.setPosition(0.15);
 
 
 
@@ -111,9 +110,9 @@ public class encoderBlueNear extends LinearOpMode {
                 setZero(250);
                 encoderDrive(0.3,-3,-3,-3,-3,10);
                 setZero(250);
-                placerMotorTurn(0.3,1000);
+
                 setZero(250);
-                robot.armServo.setPosition(-0.8);
+//                robot.armServo.setPosition(-0.8);
                 break;
 
             case MIDDLE:
@@ -125,9 +124,9 @@ public class encoderBlueNear extends LinearOpMode {
                 setZero(250);
                 encoderDrive(0.6,-33,-33,-33,-33,10);
                 setZero(250);
-                placerMotorTurn(0.3,1000);
+
                 setZero(1000);
-                robot.armServo.setPosition(-0.8);
+//                robot.armServo.setPosition(-0.8);
                 break;
             case RIGHT:
                 encoderDrive(0.5,10,10,10,10,10);
@@ -146,9 +145,9 @@ public class encoderBlueNear extends LinearOpMode {
                 setZero(250);
                 encoderDrive(0.3,-7,-7,-7,-7,10);
                 setZero(250);
-                placerMotorTurn(0.3,1000);
+
                 setZero(250);
-                robot.armServo.setPosition(-0.8);
+//                robot.armServo.setPosition(-0.8);
                 break;
         }
 
@@ -467,7 +466,7 @@ public class encoderBlueNear extends LinearOpMode {
         robot.backLeft.setPower(0);
         robot.backRight.setPower(0);
 
-        robot.placerMotor.setPower(0);
+//        robot.placerMotor.setPower(0);
 
         sleep(timer);
     }
@@ -478,7 +477,7 @@ public class encoderBlueNear extends LinearOpMode {
     }
 
     public void placerMotorTurn(double power, long time){
-        placerMotor.setPower(power);
+//        placerMotor.setPower(power);
 
         sleep(time);
     }

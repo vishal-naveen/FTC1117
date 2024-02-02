@@ -15,8 +15,8 @@ import org.opencv.core.Rect;
 
 
 
-@Autonomous(name = "BlueFar", group="Auto")
-public class BlueFar extends LinearOpMode {
+@Autonomous(name = "BlueFarNoPixel", group="Auto")
+public class BlueFarNoPixel extends LinearOpMode {
 
     private DcMotor frontLeft = null;
     private DcMotor frontRight = null;
@@ -90,21 +90,16 @@ public class BlueFar extends LinearOpMode {
                 setZero(450);
                 moveForward(0.5,400);
                 setZero(450);
-                moveBackward(0.5,200);
+                moveBackward(0.5,400);
                 setZero(450);
                 strafeLeft(0.4,300);
                 setZero(450);
-                moveForward(0.4,600);
+                moveBackward(0.4,100);
                 setZero(450);
-                strafeLeft(0.5,600);
+                motorangleclosed();
+                setZero(7500);
+                strafeLeft(0.4,1700);
                 setZero(450);
-                moveBackward(0.4,300);
-                setZero(450);
-                turnRight(0.4,700);
-                setZero(450);
-                moveBackward(0.4,300);
-                motorangle();
-                setZero(1000);
                 clawServo1.setPosition(0.5);
                 setZero(1000);
                 clawServo2.setPosition(0.5);
@@ -113,49 +108,29 @@ public class BlueFar extends LinearOpMode {
                 setZero(1000);
                 clawServo2.setPosition(0.3);
                 setZero(1000);
-                motorangleclosed();
-                setZero(2500);
-                strafeLeft(0.4,350);
-                setZero(450);
-                moveBackward(0.3,100);
                 break;
             case MIDDLE:
                 moveForward(0.5,1200);
                 setZero(450);
-                moveBackward(0.5,150);
+                moveBackward(0.5,1150);
                 setZero(450);
-                strafeRight(0.4,250);
-                setZero(450);
-                moveForward(0.4,500);
-                setZero(450);
-                strafeLeft(0.4,750);
-                setZero(450);
-                moveBackward(0.4,300);
-                setZero(450);
-                turnRight(0.4,700);
-                setZero(450);
-                moveBackward(0.4,300);
-                setZero(450);
-                motorangle();
-                setZero(250);
-                clawServo1.setPosition(0.5);
-                setZero(250);
-                clawServo2.setPosition(0.5);
-                setZero(250);
-                clawServo1.setPosition(0.3);
-                setZero(250);
-                clawServo2.setPosition(0.3);
-                setZero(250);
                 motorangleclosed();
-                setZero(250);
-                strafeLeft(0.4,400);
+                setZero(7500);
+                strafeLeft(0.4,1700);
                 setZero(450);
-                moveBackward(0.3,100);
+                clawServo1.setPosition(0.5);
+                setZero(1000);
+                clawServo2.setPosition(0.5);
+                setZero(1000);
+                clawServo1.setPosition(0.3);
+                setZero(1000);
+                clawServo2.setPosition(0.3);
+                setZero(1000);
                 break;
             case NONE:
                 moveForward(0.4,850);
                 setZero(450);
-                motoranglestart();
+                motorangleclosed();
                 setZero(450);
                 turnLeft(0.4,750);
                 setZero(450);
@@ -163,31 +138,18 @@ public class BlueFar extends LinearOpMode {
                 setZero(450);
                 moveBackward(0.6,100);
                 setZero(450);
-                strafeRight(0.4,450);
+                strafeLeft(0.4,725);
                 setZero(450);
-                moveForward(0.4,1400);
-                setZero(450);
-                strafeLeft(0.4,300);
-                setZero(450);
-                moveForward(0.4,300);
-                setZero(450);
-                turnRight(0.4,700);
-                setZero(450);
-                motorangle();
-                setZero(250);
+                moveForward(0.4,1600);
+                setZero(1000);
                 clawServo1.setPosition(0.5);
-                setZero(250);
-                clawServo2.setPosition(0.5);
-                setZero(250);
-                clawServo1.setPosition(0.3);
-                setZero(250);
-                clawServo2.setPosition(0.3);
-                setZero(250);
-                motorangleclosed();
-                setZero(250);
-                strafeLeft(0.4,400);
                 setZero(450);
-                moveBackward(0.3,100);
+                clawServo2.setPosition(0.5);
+                setZero(450);
+                clawServo1.setPosition(0.3);
+                setZero(450);
+                clawServo2.setPosition(0.3);
+                setZero(1000);
                 break;
         }
 

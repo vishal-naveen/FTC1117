@@ -13,7 +13,7 @@ import org.firstinspires.ftc.vision.VisionPortal;
 import org.opencv.core.Rect;
 
 
-@Autonomous(name="encoderRedNear", group="Blue")
+//@Autonomous(name="encoderRedNear", group="Blue")
 public class encoderRedNear extends LinearOpMode {
     HardwarePushbot         robot   = new HardwarePushbot();   // Use the hardware file
     private ElapsedTime     runtime = new ElapsedTime();
@@ -86,7 +86,7 @@ public class encoderRedNear extends LinearOpMode {
 
         telemetry.update();
 
-        robot.armServo.setPosition(0.2);
+//        robot.armServo.setPosition(0.2);
 
 
 
@@ -109,7 +109,7 @@ public class encoderRedNear extends LinearOpMode {
                 setZero(250);
                 placerMotorTurn(0.3,1000);
                 setZero(1000);
-                robot.armServo.setPosition(-0.8);
+
                 break;
             case MIDDLE:
 //                encoderDrive(0.5,30.5,30.5,30.5,30.5,10);
@@ -130,7 +130,7 @@ public class encoderRedNear extends LinearOpMode {
                 setZero(250);
                 placerMotorTurn(0.3,1000);
                 setZero(1000);
-                robot.armServo.setPosition(-0.8);
+
                 break;
             case RIGHT:
                 encoderDrive(0.5,10,10,10,10,10);
@@ -151,7 +151,7 @@ public class encoderRedNear extends LinearOpMode {
                 setZero(250);
                 placerMotorTurn(0.3,1000);
                 setZero(250);
-                robot.armServo.setPosition(-0.8);
+
                 break;
         }
 
@@ -470,7 +470,7 @@ public class encoderRedNear extends LinearOpMode {
         robot.backLeft.setPower(0);
         robot.backRight.setPower(0);
 
-        robot.placerMotor.setPower(0);
+
 
         sleep(timer);
     }
